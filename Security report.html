@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>گزارش امنیتی شبکه داخلی شرکت</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Orbitron', Tahoma, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 2rem;
+            line-height: 1.8;
+        }
+        h1, h2 {
+            font-weight: 700;
+            color: #00ff9f;
+        }
+        .section {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background-color: #161b22;
+        }
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .author {
+            font-weight: 700;
+            color: #ff3c3c;
+            font-size: 1.2rem;
+        }
+        .ip-highlight {
+            color: #ff5c5c;
+            font-weight: bold;
+        }
+        a {
+            color: #00ff9f;
+            text-decoration: none;
+        }
+        .ascii {
+            margin-top: 1rem;
+            color: #555;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+            .section {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>📡 گزارش امنیتی شبکه داخلی شرکت</h1>
+
+    <div class="section">
+        <h2>اطلاعات کلی</h2>
+        <p>📅 تاریخ گزارش: 2025-06-25</p>
+        <p>💻 تعداد دستگاه‌های شناسایی‌شده: 12</p>
+        <p>🌐 دستگاه‌های دارای HTTP/HTTPS فعال: 6</p>
+        <p>🔐 دستگاه دارای SSH فعال: 1 (Dropbear 2016.74)</p>
+    </div>
+
+    <div class="section">
+        <h2>🔍 بررسی آسیب‌پذیری‌ها</h2>
+        <ul>
+            <li>پورت‌های باز HTTP/HTTPS روی تجهیزات برند Yealink و Grandstream دیده شد.</li>
+            <li>دستگاه با آی‌پی <span class="ip-highlight">192.168.120.174</span> در برابر حمله <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750" target="_blank">Slowloris</a> آسیب‌پذیر است.</li>
+            <li>نسخه‌ی سرور HTTP این دستگاه <code>mini_httpd/1.19</code> بوده که مربوط به سال 2003 است و خطرناک تلقی می‌شود.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🛡 پیشنهادات امنیتی</h2>
+        <ol>
+            <li>بروزرسانی دستگاه‌های دارای Dropbear SSH و mini_httpd.</li>
+            <li>استفاده از فایروال جهت محدودسازی دسترسی به پورت‌های باز.</li>
+            <li>فعال‌سازی لاگ و هشدار برای تلاش‌های ناموفق در ورود به SSH و HTTP.</li>
+            <li>مرور مجدد تنظیمات دوربین‌های تحت شبکه و تغییر رمزهای عبور پیش‌فرض.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>📎 یادداشت‌ها و پیوست‌ها</h2>
+        <p>اسکن‌های انجام‌شده با ابزار <strong>Nmap</strong> شامل شناسایی پورت‌ها و نسخه‌ها بوده است:</p>
+        <pre>
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     Dropbear sshd 2016.74 (protocol 2.0)
+80/tcp   open  http    mini_httpd 1.19 19dec2003
+
+🔸 آسیب‌پذیری Slowloris (DoS) محتمل (CVE-2007-6750)
+🔸 CSRF، XSS ذخیره‌شده، DOM-based XSS یافت نشد
+🔸 پاسخ کامل HTTP از دستگاه Grandstream دریافت شد:
+    MAC Address: 00:0B:82:D1:72:63
+    Device Type: احتمالا دوربین تحت شبکه (IP Camera)
+        </pre>
+        <p>⚠️ برخی دستگاه‌ها ترافیک HTTP بدون رمزگذاری SSL ارسال می‌کنند.</p>
+    </div>
+
+    <div class="footer">
+        تهیه‌کننده: <span class="author">Amir</span>
+        <div class="ascii">
+            ▄▄▄▄    ▄▄▄       ███▄    █  ██▓ ██▀███    <br>
+            ▓█████▄ ▒████▄     ██ ▀█   █ ▓██▒▓██ ▒ ██▒<br>
+            ▒██▒ ▄██▒██  ▀█▄  ▓██  ▀█ ██▒▒██▒▓██ ░▄█ ▒<br>
+            ▒██░█▀  ░██▄▄▄▄██ ▓██▒  ▐▌██▒░██░▒██▀▀█▄  <br>
+            ░▓█  ▀█▓ ▓█   ▓██▒▒██░   ▓██░░██░░██▓ ▒██▒<br>
+            ░▒▓███▀▒ ▒▒   ▓▒█░░ ▒░   ▒ ▒ ░▓  ░ ▒▓ ░▒▓░<br>
+             ░▒   ▒   ▒   ▒▒ ░░ ░░   ░ ▒░ ▒ ░  ░▒ ░ ▒░<br>
+              ░   ░   ░   ▒      ░   ░ ░  ▒ ░  ░░   ░ <br>
+            ░ ░   ░       ░  ░         ░  ░     ░     <br>
+                  ░                                    <br>
+                                – AMIR –
+        </div>
+    </div>
+</body>
+</html>
